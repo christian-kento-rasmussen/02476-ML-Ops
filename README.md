@@ -1,62 +1,24 @@
-# FishEye
+# FishEye Detects™
 
-TorturedRats project
+## For DTU course: 02476 Machine Learning Operations 2024
+#### Overall goal of the project
+The main goal of this project is to apply the tools taught in the course on a self-chosen ML project, and use this to learn hands-on about the entire ML-Ops lifecycle. The chosen project revolves around seafood type / fish species classification/detection from images.
 
-## Project structure
 
-The directory structure of the project looks like this:
+#### The data we are going to run on (initially, may change)
+The data we will use is the large scale fish dataset from kaggle, found at https://www.kaggle.com/datasets/crowww/a-large-scale-fish-dataset. It contains a total of 9000 images, with 1000 images for each of 9 different types, namely:  gilt head bream, red sea bream, sea bass, red mullet, horse mackerel, black sea sprat, striped red mullet, trout, and shrimp.
 
-```txt
+Source for data:
+* O.Ulucan, D.Karakaya, and M.Turkan.(2020) A large-scale dataset for fish segmentation and classification.
+In Conf. Innovations Intell. Syst. Appli. (ASYU)
 
-├── Makefile             <- Makefile with convenience commands like `make data` or `make train`
-├── README.md            <- The top-level README for developers using this project.
-├── data
-│   ├── processed        <- The final, canonical data sets for modeling.
-│   └── raw              <- The original, immutable data dump.
-│
-├── docs                 <- Documentation folder
-│   │
-│   ├── index.md         <- Homepage for your documentation
-│   │
-│   ├── mkdocs.yml       <- Configuration file for mkdocs
-│   │
-│   └── source/          <- Source directory for documentation files
-│
-├── models               <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks            <- Jupyter notebooks.
-│
-├── pyproject.toml       <- Project configuration file
-│
-├── reports              <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures          <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt     <- The requirements file for reproducing the analysis environment
-|
-├── requirements_dev.txt <- The requirements file for reproducing the analysis environment
-│
-├── tests                <- Test files
-│
-├── FishEye  <- Source code for use in this project.
-│   │
-│   ├── __init__.py      <- Makes folder a Python module
-│   │
-│   ├── data             <- Scripts to download or generate data
-│   │   ├── __init__.py
-│   │   └── make_dataset.py
-│   │
-│   ├── models           <- model implementations, training script and prediction script
-│   │   ├── __init__.py
-│   │   ├── model.py
-│   │
-│   ├── visualization    <- Scripts to create exploratory and results oriented visualizations
-│   │   ├── __init__.py
-│   │   └── visualize.py
-│   ├── train_model.py   <- script for training the model
-│   └── predict_model.py <- script for predicting from a model
-│
-└── LICENSE              <- Open-source license if one is chosen
-```
+#### The framework we are going to use.
+The project structure will be organized around several development stages. During development, we will use CookieCutter and PyTorch Lightning to develop the model. We will utilize Git, DVC, Hydra, and Weights & Biases for experiment management. To ensure good code practices, we will employ Python environments, pytest, and pylint, integrated with GitHub Actions. The code will be deployed using Docker and FastAPI, and optimized with the PyTorch Profiler.
+
+### The models we expect to use
+Initially we are going to use a CNN based model for classifiacation, but we may later include a pre-trained YOLO or Mask R-CNN from huggingface or using the pytorch ecosystem.
+
+![ML Canvas](<reports/figures/ML Canvas.png>)
 
 Created using [mlops_template](https://github.com/SkafteNicki/mlops_template),
 a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting
