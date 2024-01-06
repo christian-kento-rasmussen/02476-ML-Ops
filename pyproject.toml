@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "FishEye"
+version = "0.0.1"
+description = "The main goal of this project is to apply the tools taught in the course on a self-chosen ML project, and use this to learn hands-on about the entire ML-Ops lifecycle."
+authors = [
+  { name = "Christian Rasmussen", email = "your@email.com" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=The chosen project revolves around seafood type / fish species classification/detection from images."
+dynamic = ["dependencies", "optional-dependencies"]
+
+[tool.setuptools]
+packages = ["FishEye"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.dynamic.optional-dependencies]
+dev = {file = ['requirements_dev.txt']}
+
+[tool.ruff]
+line-length = 120
