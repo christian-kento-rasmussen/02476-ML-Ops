@@ -1,6 +1,6 @@
 # FishEye
 
-The main goal of this project is to apply the tools taught in the course on a self-chosen ML project, and use this to learn hands-on about the entire ML-Ops lifecycle.
+TorturedRats project
 
 ## Project structure
 

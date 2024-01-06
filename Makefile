@@ -5,7 +5,7 @@
 #################################################################################
 
 PROJECT_NAME = FishEye
-PYTHON_VERSION = The chosen project revolves around seafood type / fish species classification/detection from images.
+PYTHON_VERSION = 3.11
 PYTHON_INTERPRETER = python
 
 #################################################################################

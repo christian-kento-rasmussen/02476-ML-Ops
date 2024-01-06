@@ -5,13 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "FishEye"
 version = "0.0.1"
-description = "The main goal of this project is to apply the tools taught in the course on a self-chosen ML project, and use this to learn hands-on about the entire ML-Ops lifecycle."
+description = "TorturedRats project"
 authors = [
-  { name = "Christian Rasmussen", email = "your@email.com" },
+  { name = "TorturedRats", email = "your@email.com" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
-requires-python = ">=The chosen project revolves around seafood type / fish species classification/detection from images."
+requires-python = ">=3.11"
 dynamic = ["dependencies", "optional-dependencies"]
 
 [tool.setuptools]

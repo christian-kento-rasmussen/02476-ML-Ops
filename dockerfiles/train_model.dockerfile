@@ -1,5 +1,5 @@
 # Base image
-FROM python:The chosen project revolves around seafood type / fish species classification/detection from images.-slim
+FROM python:3.11-slim
 
 RUN apt update && \
     apt install --no-install-recommends -y build-essential gcc && \
