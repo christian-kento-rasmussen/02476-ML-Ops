@@ -16,6 +16,10 @@ PYTHON_INTERPRETER = python
 create_environment:
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) --no-default-packages -y
 
+## Activate environment
+activate_environment:
+	conda activate $(PROJECT_NAME)
+
 ## Install Python Dependencies
 requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
