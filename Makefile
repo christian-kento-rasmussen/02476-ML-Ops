@@ -5,7 +5,7 @@
 #################################################################################
 
 PROJECT_NAME = FishEye
-PYTHON_VERSION = 3.11
+PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 
 #################################################################################
@@ -41,7 +41,8 @@ clean:
 #################################################################################
 
 ## Process raw data into processed data
-data:
+data: 
+	kaggle datasets download -d crowww/a-large-scale-fish-dataset -p data/raw --unzip
 	python $(PROJECT_NAME)/data/make_dataset.py
 
 #################################################################################
