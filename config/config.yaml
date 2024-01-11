@@ -1,0 +1,29 @@
+#config.yaml
+paths:
+  raw: 'data/raw'
+  processed: 'data/processed'
+  kaggle_owner: 'crowww'
+  kaggle_name: 'a-large-scale-fish-dataset'
+
+
+trainer_hyperparameters:
+  seed: 42
+  max_epochs: 10
+  batch_size: 64
+  learning_rate: 0.001
+  patience: 10
+  check_val_every_n_epoch: 1
+  mode: 'min'
+  monitor: 'val_loss'
+
+wandb_settings:
+  entity: 'team-christian'
+  project: 'FishEye'
+  mode: 'offline'
+
+print_cfg: true
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
