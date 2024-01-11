@@ -9,6 +9,8 @@ class FishDataModule(pl.LightningDataModule):
         super().__init__()
         self.data_dir = data_dir
         self.batch_size = batch_size
+        self.prepare_data_per_node = True
+
 
     def setup(self, stage: str):
         images = torch.load(os.path.join(self.data_dir, "images.pt"))        
