@@ -5,3 +5,4 @@ numpy
 kaggle
 pytorch_lightning
 pillow
+hydra-core >= 1.3.0

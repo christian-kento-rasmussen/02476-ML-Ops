@@ -6,7 +6,7 @@ from torch import nn, optim
 
 
 class FishNN(L.LightningModule):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, cfg, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.classifier = nn.Sequential(
             torch.nn.Conv2d(3, 16, kernel_size=3, stride=2),
@@ -15,6 +15,7 @@ class FishNN(L.LightningModule):
             torch.nn.Linear(16 * 294 * 222, 10),
         )
 
+        self.lr = cfg.trainer_hyperparameters.learning_rate
         self.criterium = torch.nn.CrossEntropyLoss()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -41,7 +42,7 @@ class FishNN(L.LightningModule):
         return loss
 
     def configure_optimizers(self) -> Any:
-        return optim.Adam(self.parameters(), lr=1e-3)
+        return optim.Adam(self.parameters(), lr=self.lr)
 
 
 if __name__ == "__main__":
