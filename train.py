@@ -1,14 +1,18 @@
-from FishEye.train_model import train
 import hydra
 import wandb
-from omegaconf import OmegaConf
+from omegaconf import DictConfig, OmegaConf
+
+from FishEye.train_model import train
 
 
 @hydra.main(config_path="config", config_name="config")
-def main(cfg):
-    
+def main(cfg: DictConfig):
+    """Main entry point for training.
 
-    # Print the config
+    Args:
+        cfg (DictConfig): hydra config file
+    """
+
     if cfg.print_cfg:
         print(OmegaConf.to_yaml(cfg))
 
