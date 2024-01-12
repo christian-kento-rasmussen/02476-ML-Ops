@@ -8,14 +8,13 @@ from PIL import Image
 from tqdm import tqdm
 
 
-def process_data(raw_data_path:str ="data/raw/NA_Fish_Dataset", processed_data_path:str="data/processed") -> None:
+def process_data(raw_data_path: str = "data/raw/NA_Fish_Dataset", processed_data_path: str = "data/processed") -> None:
     """_summary_
 
     Args:
         raw_data_path (str, optional): _description_. Defaults to "data/raw/NA_Fish_Dataset".
         processed_data_path (str, optional): _description_. Defaults to "data/processed".
     """
-
 
     folder_paths = glob(os.path.join(raw_data_path, "*"))
 
@@ -41,7 +40,6 @@ def process_data(raw_data_path:str ="data/raw/NA_Fish_Dataset", processed_data_p
     torch.save(stacked_labels, os.path.join(processed_data_path, "labels.pt"))
     with open(os.path.join(processed_data_path, "label_map.json"), "w") as fp:
         json.dump(label_map, fp)
-
 
 
 if __name__ == "__main__":

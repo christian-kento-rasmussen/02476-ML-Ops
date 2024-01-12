@@ -11,16 +11,16 @@ class FishDataModule(pl.LightningDataModule):
         self.batch_size = batch_size
         self.prepare_data_per_node = True
 
-
     def setup(self, stage: str):
-        images = torch.load(os.path.join(self.data_dir, "images.pt"))        
+        images = torch.load(os.path.join(self.data_dir, "images.pt"))
         labels = torch.load(os.path.join(self.data_dir, "labels.pt"))
         dataset = TensorDataset(images, labels)
         self.train, self.test, self.val = random_split(
-            dataset, [int(len(dataset)*0.8), int(len(dataset)*0.1), int(len(dataset)*0.1)], generator = torch.Generator().manual_seed(69)
+            dataset,
+            [int(len(dataset) * 0.8), int(len(dataset) * 0.1), int(len(dataset) * 0.1)],
+            generator=torch.Generator().manual_seed(69),
         )
-        
-        
+
     def train_dataloader(self):
         return DataLoader(self.train, batch_size=self.batch_size)
 
@@ -39,7 +39,4 @@ class FishDataModule(pl.LightningDataModule):
 
 
 if __name__ == "__main__":
-    
     pass
-
-    

@@ -8,6 +8,7 @@ import wandb
 from pytorch_lightning.loggers import WandbLogger
 from omegaconf import OmegaConf
 
+
 def train(cfg):
     # Load all hyperparameters from the config file
     BATCH_SIZE = cfg.trainer_hyperparameters.batch_size
@@ -24,19 +25,22 @@ def train(cfg):
     early_stopping_callback = pl.callbacks.EarlyStopping(monitor=MONITOR, patience=PATIENCE)
 
     # Initialize a W&B logger
-    wandb.init(project=cfg.wandb_settings.project, config=OmegaConf.to_container(cfg, resolve=True, throw_on_missing=True), entity=cfg.wandb_settings.entity, mode=cfg.wandb_settings.mode)
+    wandb.init(
+        project=cfg.wandb_settings.project,
+        config=OmegaConf.to_container(cfg, resolve=True, throw_on_missing=True),
+        entity=cfg.wandb_settings.entity,
+        mode=cfg.wandb_settings.mode,
+    )
     wandb_logger = WandbLogger(experiment=wandb.run)
 
     trainer = Trainer(
         max_epochs=MAX_EPOCHS,
         check_val_every_n_epoch=CHECK_VAL_EVERY_N_EPOCH,
         callbacks=[checkpoint_callback, early_stopping_callback],
-        logger = wandb_logger
+        logger=wandb_logger,
     )
 
     trainer.fit(model, fishDataModule)
 
-    
-
     # Test the model with the lowest validation loss
-    trainer.test(datamodule=fishDataModule, ckpt_path='best')
+    trainer.test(datamodule=fishDataModule, ckpt_path="best")
