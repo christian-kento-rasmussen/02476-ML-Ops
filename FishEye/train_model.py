@@ -39,4 +39,4 @@ def train(cfg):
     
 
     # Test the model with the lowest validation loss
-    trainer.test(datamodule=FishDataModule, ckpt_path='best')
+    trainer.test(datamodule=fishDataModule, ckpt_path='best')

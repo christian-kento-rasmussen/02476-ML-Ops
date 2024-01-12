@@ -1,6 +1,5 @@
 from FishEye.train_model import train
 import hydra
-import wandb
 from omegaconf import OmegaConf
 
 

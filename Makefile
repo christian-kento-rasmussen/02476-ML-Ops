@@ -45,6 +45,13 @@ data:
 	kaggle datasets download -d crowww/a-large-scale-fish-dataset -p data/raw --unzip
 	python $(PROJECT_NAME)/data/make_dataset.py
 
+
+OUTPUT = latest
+## Run profiling
+profile:
+	python -m cProfile -o .profiling/$(OUTPUT).prof train.py
+	snakeviz .profiling/$(OUTPUT).prof
+
 #################################################################################
 # Documentation RULES                                                           #
 #################################################################################
@@ -115,3 +122,5 @@ help:
 		printf "\n"; \
 	}' \
 	| more $(shell test $(shell uname) = Darwin && echo '--no-init --raw-control-chars')
+
+
