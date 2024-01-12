@@ -8,7 +8,15 @@ from PIL import Image
 from tqdm import tqdm
 
 
-def process_data(raw_data_path="data/raw/NA_Fish_Dataset", processed_data_path="data/processed"):
+def process_data(raw_data_path:str ="data/raw/NA_Fish_Dataset", processed_data_path:str="data/processed") -> None:
+    """_summary_
+
+    Args:
+        raw_data_path (str, optional): _description_. Defaults to "data/raw/NA_Fish_Dataset".
+        processed_data_path (str, optional): _description_. Defaults to "data/processed".
+    """
+
+
     folder_paths = glob(os.path.join(raw_data_path, "*"))
 
     label_map = {}

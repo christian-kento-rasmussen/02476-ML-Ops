@@ -1,0 +1,6 @@
+[core]
+    remote = fishbucket
+['remote "fishbucket"']
+    url = gs://bucket_o_fish
+    credentialpath = /home/eigil/credentials/mlops_creds.json
+    version_aware = true
