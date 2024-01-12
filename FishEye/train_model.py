@@ -1,9 +1,9 @@
 import pytorch_lightning as pl
-import wandb
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning import Trainer
 from pytorch_lightning.loggers import WandbLogger
 
+import wandb
 from FishEye.data.data_module import FishDataModule
 from FishEye.models.model import FishNN
 
@@ -50,4 +50,4 @@ def train(cfg: DictConfig):
     trainer.fit(model, fishDataModule)
 
     # Test the model with the lowest validation loss
-    trainer.test(datamodule=FishDataModule, ckpt_path="best")
+    trainer.test(datamodule=fishDataModule, ckpt_path="best")
