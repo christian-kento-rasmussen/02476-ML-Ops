@@ -44,7 +44,7 @@ jobs:
 
     - name: DVC Pull
       run: |
-        dvc pull --verbose
+        dvc pull --verbose 
 
     - name: Test with pytest
       run: |
