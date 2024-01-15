@@ -30,6 +30,8 @@ jobs:
     - name: DVC Pull
       run: |
         dvc pull
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ./gcp-key.json
 
     - name: Test with pytest
       run: |
