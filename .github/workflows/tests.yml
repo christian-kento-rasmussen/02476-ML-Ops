@@ -25,7 +25,7 @@ jobs:
         pip install -r requirements_tests.txt
     
     - name: Set up Google Cloud credentials
-      run: echo "$secrets.DATA_BUCKET_SECRET" > gcp-key.json
+      run: cat "$secrets.DATA_BUCKET_SECRET" > gcp-key.json
     
     - name: DVC Pull
       run: |
