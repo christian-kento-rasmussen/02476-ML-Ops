@@ -34,7 +34,7 @@ jobs:
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
       with: 
-        credentials_json: '${{ secrets.DATA_BUCKET_SECRET }}'
+        credentials_json: '${{ secrets.Christian }}'
     
     - uses: iterative/setup-dvc@v1
     - name: DVC Pull
