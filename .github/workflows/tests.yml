@@ -33,7 +33,7 @@ jobs:
     
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
-      with:
+      with: 
         credentials_json: '${{ secrets.DATA_BUCKET_SECRET }}'
     
     - uses: iterative/setup-dvc@v1
