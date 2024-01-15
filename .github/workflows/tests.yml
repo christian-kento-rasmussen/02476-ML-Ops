@@ -22,11 +22,14 @@ jobs:
         pip install -r requirements.txt
         pip install -r requirements_tests.txt
     
-    - uses: iterative/setup-dvc@v1
-    - name: Get data
-      run: dvc pull
+    - name: Set up Google Cloud credentials
+      run: echo "${{secrets.DATA_BUCKET_SECRET}}" > gcp-key.json
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.DATA_BUCKET_SECRET }}
+        GOOGLE_APPLICATION_CREDENTIALS: ./gcp-key.json
+
+    - name: DVC Pull
+      run: |
+        dvc pull
 
     - name: Test with pytest
       run: |
