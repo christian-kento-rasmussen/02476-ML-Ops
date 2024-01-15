@@ -16,6 +16,15 @@ jobs:
       with:
         python-version: 3.10.13
     
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -35,7 +44,8 @@ jobs:
 
     - name: DVC Pull
       run: |
-        dvc pull
+        dvc pull --verbose
+
     - name: Test with pytest
       run: |
         pip install pytest
