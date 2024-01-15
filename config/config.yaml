@@ -23,6 +23,8 @@ wandb_settings:
 
 print_cfg: true
 
+profile: True
+
 hydra:
   output_subdir: null
   run:
