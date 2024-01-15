@@ -178,5 +178,5 @@ cython_debug/
 
 data/
 models/
-wabdb/
+wandb/
 .profiling/
