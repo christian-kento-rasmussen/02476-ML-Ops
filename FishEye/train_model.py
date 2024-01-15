@@ -1,15 +1,20 @@
 import pytorch_lightning as pl
+from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning import Trainer
+from pytorch_lightning.loggers import WandbLogger
 
+import wandb
 from FishEye.data.data_module import FishDataModule
 from FishEye.models.model import FishNN
 
-import wandb
-from pytorch_lightning.loggers import WandbLogger
-from omegaconf import OmegaConf
 
+def train(cfg: DictConfig):
+    """This function trains the model
 
-def train(cfg):
+    Args:
+        cfg (DictConfig): Hydra config
+    """
+
     # Load all hyperparameters from the config file
     BATCH_SIZE = cfg.trainer_hyperparameters.batch_size
     MAX_EPOCHS = cfg.trainer_hyperparameters.max_epochs
@@ -18,9 +23,11 @@ def train(cfg):
     MODE = cfg.trainer_hyperparameters.mode
     MONITOR = cfg.trainer_hyperparameters.monitor
 
-    model = FishNN(cfg)  # this is our LightningModule
+    # Initialize the model and the data module
+    model = FishNN(cfg)
     fishDataModule = FishDataModule(batch_size=BATCH_SIZE)
 
+    # Initialize the callbacks
     checkpoint_callback = pl.callbacks.ModelCheckpoint(dirpath="./models", monitor=MONITOR, mode=MODE)
     early_stopping_callback = pl.callbacks.EarlyStopping(monitor=MONITOR, patience=PATIENCE)
 

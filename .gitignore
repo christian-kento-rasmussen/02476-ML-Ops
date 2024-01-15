@@ -176,7 +176,13 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-data/
-models/
-wandb/
-.profiling/
+# dvc folder to ignore
+data
+models
+
+# local wandb folder to ignore
+wandb
+
+# local profiling folder to ignore
+.profiling
+

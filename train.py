@@ -1,12 +1,19 @@
-from FishEye.train_model import train
 import hydra
-from omegaconf import OmegaConf
+import wandb
+from omegaconf import DictConfig, OmegaConf
 import torch.autograd.profiler as profiler
+
+from FishEye.train_model import train
 
 
 @hydra.main(config_path="config", config_name="config")
-def main(cfg):
-    # Print the config
+def main(cfg: DictConfig):
+    """Main entry point for training.
+
+    Args:
+        cfg (DictConfig): hydra config file
+    """
+
     if cfg.print_cfg:
         print(OmegaConf.to_yaml(cfg))
 
