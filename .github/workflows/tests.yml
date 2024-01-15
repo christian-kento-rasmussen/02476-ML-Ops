@@ -18,12 +18,7 @@ jobs:
     
     - name: Cache dependencies
       uses: actions/cache@v2
-      with:
-        path: |
-          ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+      id:   cache-dependencies
     
     - name: Install dependencies
       run: |
