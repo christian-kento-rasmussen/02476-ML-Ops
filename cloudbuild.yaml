@@ -1,5 +1,5 @@
 steps:
     - name: 'gcr.io/cloud-builders/docker'
-      args: ['build', '-t', 'gcr.io/exalted-analogy-410916/fishtrainer', './dockerfiles/train_model_dockerfile']
+      args: ['build', '-t', 'gcr.io/exalted-analogy-410916/fishtrainer', './dockerfiles/train_model.dockerfile']
     - name: 'gcr.io/cloud-builders/docker'
       args: ['push', 'gcr.io/exalted-analogy-410916/fishtrainer']
