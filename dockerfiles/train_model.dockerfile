@@ -8,13 +8,13 @@ RUN apt update && \
 
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
-COPY config/ config/
+COPY config/ config//
 COPY FishEye/ FishEye/
 COPY train.py train.py
 
 
 WORKDIR /
-RUN --mount=type=cache,target=/root/.cache pip install -r requirements.txt --no-cache-dir
+#RUN --mount=type=cache,target=/root/.cache pip install -r requirements.txt --no-cache-dir
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
 RUN mkdir models
