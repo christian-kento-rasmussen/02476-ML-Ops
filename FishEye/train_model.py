@@ -23,12 +23,16 @@ def train(cfg: DictConfig):
     MODE = cfg.trainer_hyperparameters.mode
     MONITOR = cfg.trainer_hyperparameters.monitor
 
+    # Extracting path 
+    DATAPATH = cfg.paths.processed
+    SAVE_MODEL_PATH = cfg.paths.save_model_path
+
     # Initialize the model and the data module
     model = FishNN(cfg)
-    fishDataModule = FishDataModule(batch_size=BATCH_SIZE)
+    fishDataModule = FishDataModule(data_dir=DATAPATH, batch_size=BATCH_SIZE)
 
     # Initialize the callbacks
-    checkpoint_callback = pl.callbacks.ModelCheckpoint(dirpath="./models", monitor=MONITOR, mode=MODE)
+    checkpoint_callback = pl.callbacks.ModelCheckpoint(dirpath=SAVE_MODEL_PATH, monitor=MONITOR, mode=MODE)
     early_stopping_callback = pl.callbacks.EarlyStopping(monitor=MONITOR, patience=PATIENCE)
 
     # Initialize a W&B logger
