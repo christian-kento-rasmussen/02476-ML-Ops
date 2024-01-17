@@ -17,3 +17,6 @@ kaggle
 pipreqs
 dvc
 dvc[gs]
+
+# Deployment
+requests

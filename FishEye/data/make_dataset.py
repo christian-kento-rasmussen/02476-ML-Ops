@@ -1,10 +1,11 @@
 import json
 import os
 from glob import glob
-
 import numpy as np
+
 import torch
 from PIL import Image
+from torch.nn.functional import interpolate
 from tqdm import tqdm
 
 
@@ -27,21 +28,19 @@ def process_data(raw_data_path: str = "data/raw/NA_Fish_Dataset", processed_data
     for label_i, folder in tqdm(enumerate(folder_paths), total=len(folder_paths), desc="Processing data"):
         label_map[label_i] = folder.split("/")[-1]
         for image_path in glob(os.path.join(folder, "*")):
-            image = Image.open(image_path)
-            image = image.resize((590, 445))  # converts all images to the same size (smallest image is 590x445)
-            image = image.convert("RGB")  # Convert image to RGB format
-            image = torch.tensor(image)  # Convert image to torch tensor
+            image = np.array(Image.open(image_path))
+            image = torch.tensor(image)
+            image = image.permute(2, 0, 1)  # fixes the shape of the imagesi
+            image = interpolate(image.unsqueeze(0), size=(445, 590), mode="bilinear", align_corners=False).squeeze(0)
 
             images.append(image)
             labels.append(torch.tensor(label_i))
 
     stacked_images = torch.stack(images)
-    stacked_images = stacked_images.permute(0, 3, 1, 2)  # fixes the shape of the images
-
     stacked_labels = torch.stack(labels)
 
     # saves data to processed_data_path
-    torch.save(stacked_images, os.path.join(processed_data_path, "images.pt"))
+    torch.save(stacked_images.float(), os.path.join(processed_data_path, "images.pt"))
     torch.save(stacked_labels, os.path.join(processed_data_path, "labels.pt"))
 
     # saves the mapping of labels to their names
