@@ -1,6 +1,10 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background: url('background_animation.gif') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .container {
@@ -38,3 +42,10 @@ button {
 #responseContainer {
     margin-top: 20px;
 }
+
+#imageCanvas {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
