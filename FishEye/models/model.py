@@ -4,7 +4,7 @@ import pytorch_lightning as L
 import torch
 from omegaconf import DictConfig
 from torch import nn, optim
-
+from torchmetrics.classification import Accuracy
 
 class FishNN(L.LightningModule):
     def __init__(self, cfg: DictConfig, *args: Any, **kwargs: Any) -> None:
@@ -14,11 +14,13 @@ class FishNN(L.LightningModule):
             cfg (DictConfig): hydra config file
         """
         super().__init__(*args, **kwargs)
+        self.accuracy = Accuracy(task="multiclass", num_classes=9)
+
         self.classifier = nn.Sequential(
             torch.nn.Conv2d(3, 16, kernel_size=3, stride=2),
             torch.nn.ReLU(),
             torch.nn.Flatten(),
-            torch.nn.Linear(16 * 294 * 222, 10),
+            torch.nn.Linear(16 * 294 * 222, 9),
         )
 
         self.lr = cfg.trainer_hyperparameters.learning_rate
@@ -48,6 +50,9 @@ class FishNN(L.LightningModule):
         data, target = batch
         preds = self(data)
         loss = self.criterion(preds, target)
+        train_acc = self.accuracy(preds, target)
+        self.log("train_acc", train_acc, on_epoch=True, prog_bar=True, logger=True)
+        self.log("train_loss", loss, on_epoch=True, prog_bar=True, logger=True)
         return loss
 
     def validation_step(self, batch: Any, batch_idx: int) -> torch.Tensor:
@@ -63,8 +68,9 @@ class FishNN(L.LightningModule):
         data, target = batch
         preds = self(data)
         loss = self.criterion(preds, target)
-
-        self.log("val_loss", loss, on_step=False, on_epoch=True, prog_bar=True, logger=True)
+        val_acc = self.accuracy(preds, target)
+        self.log("val_acc", val_acc, on_epoch=True, prog_bar=True, logger=True)
+        self.log("val_loss", loss, on_epoch=True, prog_bar=True, logger=True)
         return loss
 
     def test_step(self, batch: torch.Tensor, batch_idx: int) -> torch.Tensor:
@@ -80,6 +86,10 @@ class FishNN(L.LightningModule):
         data, target = batch
         preds = self(data)
         loss = self.criterion(preds, target)
+        test_acc = self.accuracy(preds, target)
+
+        self.log("test_acc", test_acc, on_epoch=True, prog_bar=True, logger=True)
+        self.log("test_loss", loss, on_epoch=True, prog_bar=True, logger=True)
         return loss
 
     def configure_optimizers(self) -> torch.optim.Optimizer:
