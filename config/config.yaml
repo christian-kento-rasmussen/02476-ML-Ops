@@ -23,7 +23,7 @@ trainer_hyperparameters:
 wandb_settings:
   entity: 'team-christian'
   project: 'FishEye'
-  mode: 'online'
+  mode: 'offline'
 
 print_cfg: true
 
