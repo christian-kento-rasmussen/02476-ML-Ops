@@ -1,4 +1,7 @@
 #config.yaml
+version: 1.3
+version_base: 1.3
+
 paths:
   raw: '/gcs/bucket_o_fish/data/raw'
   processed: '/gcs/bucket_o_fish/data/processed'
