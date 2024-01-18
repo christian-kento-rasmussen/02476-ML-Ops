@@ -1,0 +1,7 @@
+# config_cpu.yaml
+workerPoolSpecs:
+    machineSpec:
+        machineType: n1-highmem-2
+    replicaCount: 1
+    containerSpec:
+        imageUri: gcr.io/exalted-analogy-410916/fishtrainer@sha256:1e236f34b070998a751515916f6dac32a009d198b8c3e794fe3ef88ef654cc64

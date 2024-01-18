@@ -1,18 +1,19 @@
 #config.yaml
 paths:
-  raw: 'data/raw'
-  processed: 'data/processed'
+  raw: '/gcs/bucket_o_fish/data/raw'
+  processed: '/gcs/bucket_o_fish/data/processed'
   kaggle_owner: 'crowww'
   kaggle_name: 'a-large-scale-fish-dataset'
+  save_model_path: '/gcs/bucket_o_fish/models'
 
 
 trainer_hyperparameters:
   seed: 42
-  max_epochs: 10
+  max_epochs: 100
   batch_size: 64
   learning_rate: 0.001
-  patience: 10
-  check_val_every_n_epoch: 1
+  patience: 50
+  check_val_every_n_epoch: 5
   mode: 'min'
   monitor: 'val_loss'
 

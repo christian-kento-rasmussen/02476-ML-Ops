@@ -183,6 +183,13 @@ models
 # local wandb folder to ignore
 wandb
 
+<<<<<<< HEAD
 # local profiling folder to ignore
 .profiling
 
+=======
+.profiling/.prof
+.profiling/latest.prof
+.profiling/test1.prof
+.profiling/test2.prof
+>>>>>>> main

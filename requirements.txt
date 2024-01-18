@@ -6,3 +6,9 @@ pytorch_lightning==2.1.3
 torch==2.1.2
 tqdm==4.66.1
 wandb
+
+pydantic
+fastapi
+uvicorn
+torchvision
+python-multipart
