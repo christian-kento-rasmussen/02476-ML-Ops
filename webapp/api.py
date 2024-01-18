@@ -12,15 +12,16 @@ from PIL import Image
 import json
 
 with open("data/processed/label_map.json", "r") as fp:
-        label_mapping = json.load(fp)
+    label_mapping = json.load(fp)
 
-model = FishNN.load_from_checkpoint("models/epoch=99-step=600.ckpt", cfg=OmegaConf.load("config/config.yaml"))
+model = FishNN.load_from_checkpoint("models/epoch=409-step=4510.ckpt", cfg=OmegaConf.load("config/config.yaml"))
 model.to("cpu")
 
 app = FastAPI()
 
 # Mount the static folder to serve static files
 app.mount("/static", StaticFiles(directory="webapp/static"), name="static")
+
 
 # Define a route to serve the main HTML file
 @app.get("/", response_class=FileResponse)
@@ -47,6 +48,6 @@ async def predict(image: UploadFile = File(...)):
     predictions = predict_model_(model, tensor_image, label_mapping)
 
     # Process the image and generate some text
-    text = predictions[0] #process_image(image)
+    text = predictions[0]  # process_image(image)
 
     return {"result": text}

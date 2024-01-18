@@ -11,7 +11,7 @@ paths:
 
 trainer_hyperparameters:
   seed: 42
-  max_epochs: 500
+  max_epochs: 200
   batch_size: 32
   learning_rate: 0.00005
   patience: 30

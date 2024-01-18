@@ -63,13 +63,14 @@ def train(cfg: DictConfig):
     wandb.log({"train_images": [wandb.Image(image, caption=label) for image, label in zip(train_images, train_labels)]})
 
     # compiles model
-    model.compile()
+    # model.compile()
 
     # train image classifier
     trainer.fit(model, fishDataModule)
 
     # Test the model with the lowest validation loss
     trainer.test(datamodule=fishDataModule, ckpt_path=SAVE_BY)
+
 
 if __name__ == "__main__":
     train()

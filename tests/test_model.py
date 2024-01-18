@@ -7,7 +7,6 @@ from FishEye.models.model import FishNN
 
 
 def test_output_shape_of_model(cfg=OmegaConf.load("config/config.yaml")):
-    
     # Create an instance of your model
     model = FishNN(cfg)
 

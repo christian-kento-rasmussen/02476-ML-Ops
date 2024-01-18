@@ -17,14 +17,17 @@ class FishNN(L.LightningModule):
         super().__init__(*args, **kwargs)
         self.accuracy = Accuracy(task="multiclass", num_classes=9)
 
-        self.classifier = nn.Sequential(
+        self.feature_extractor = nn.Sequential(
             torch.nn.Conv2d(3, 16, kernel_size=3, stride=2), # dim (h,w) = (445-3)/2+1=222,  (590-3)/2+1=294
             torch.nn.ReLU(),
             torch.nn.Conv2d(16, 32, kernel_size=3, stride=2), # dim (h,w)
             torch.nn.ReLU(),
             torch.nn.Conv2d(32, 32, kernel_size=3, stride=2), # dim (h,w)
             torch.nn.ReLU(),
-            torch.nn.Flatten(),
+            torch.nn.Flatten()
+        )
+
+        self.classifier = nn.Sequential(
             torch.nn.Linear(124416, 256), # dim: 32*292*220 = 2037760
             torch.nn.Dropout(0.2),
             torch.nn.Linear(256, 9), # dim: 32*292*220 = 2037760
@@ -43,8 +46,10 @@ class FishNN(L.LightningModule):
         Returns:
             torch.Tensor: output logits
         """
-        return self.classifier(x)
-
+        x = self.feature_extractor(x)
+        x = self.classifier(x)
+        return x
+        
     def training_step(self, batch: torch.Tensor, batch_idx: int) -> torch.Tensor:
         """Training step for the model
 

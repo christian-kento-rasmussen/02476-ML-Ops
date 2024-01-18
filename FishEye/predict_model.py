@@ -1,6 +1,5 @@
 import json
 from typing import Dict, List
-
 import torch
 from omegaconf import OmegaConf
 from PIL import Image
@@ -48,14 +47,32 @@ if __name__ == "__main__":
     # Load the best model weights into the model
     import torchvision.transforms as transforms
 
-    model = FishNN.load_from_checkpoint("models/epoch=99-step=600.ckpt", cfg=OmegaConf.load("config/config.yaml"))
+    model = FishNN.load_from_checkpoint("models/epoch=409-step=4510.ckpt", cfg=OmegaConf.load("config/config.yaml"))
     model.to("cpu")
+    model.eval()
 
     # Raw data to predict
     image_filenames = [
-        "data/raw/NA_Fish_Dataset/Trout/00005.png",
-        #                       'data/raw/NA_Fish_Dataset/Red Sea Bream/100_1263.JPG',
-        "data/raw/NA_Fish_Dataset/Red Mullet/00017.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00001.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00002.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00003.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00004.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00005.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00006.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00007.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00008.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00009.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00010.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00011.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00012.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00013.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00014.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00015.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00016.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00017.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00018.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00019.png",
+        "data/raw/NA_Fish_Dataset/Black Sea Sprat/00020.png",
     ]
 
     # Load the images from the given paths as tensors
@@ -65,7 +82,6 @@ if __name__ == "__main__":
     images = preprocess_images(images)
 
     # Specify the label mapping
-
     with open("data/processed/label_map.json", "r") as fp:
         label_mapping = json.load(fp)
 
