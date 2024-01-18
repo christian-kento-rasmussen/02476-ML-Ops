@@ -20,10 +20,12 @@ class FishNN(L.LightningModule):
         self.classifier = nn.Sequential(
             torch.nn.Conv2d(3, 16, kernel_size=3, stride=2), # dim (h,w) = (445-3)/2+1=222,  (590-3)/2+1=294
             torch.nn.ReLU(),
-            torch.nn.Conv2d(16, 32, kernel_size=3, stride=1), # dim (h,w)
+            torch.nn.Conv2d(16, 32, kernel_size=3, stride=2), # dim (h,w)
+            torch.nn.ReLU(),
+            torch.nn.Conv2d(32, 32, kernel_size=3, stride=2), # dim (h,w)
             torch.nn.ReLU(),
             torch.nn.Flatten(),
-            torch.nn.Linear(2055680, 256), # dim: 32*292*220 = 2037760
+            torch.nn.Linear(124416, 256), # dim: 32*292*220 = 2037760
             torch.nn.Dropout(0.2),
             torch.nn.Linear(256, 9), # dim: 32*292*220 = 2037760
             torch.nn.Dropout(0.2),
