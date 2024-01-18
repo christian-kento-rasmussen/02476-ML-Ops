@@ -1,3 +1,4 @@
+import hydra
 import pytorch_lightning as pl
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning import Trainer
@@ -8,6 +9,7 @@ from FishEye.data.data_module import FishDataModule
 from FishEye.models.model import FishNN
 
 
+@hydra.main(version_base=None, config_path="../config", config_name="config")
 def train(cfg: DictConfig):
     """This function trains the model
 
@@ -65,3 +67,6 @@ def train(cfg: DictConfig):
 
     # Test the model with the lowest validation loss
     trainer.test(datamodule=fishDataModule, ckpt_path="best")
+
+if __name__ == "__main__":
+    train()
