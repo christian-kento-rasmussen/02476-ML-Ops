@@ -1,10 +1,12 @@
-#config.yaml
+version: 1.3
+version_base: 1.3
+
 paths:
-  raw: '/gcs/bucket_o_fish/data/raw'
-  processed: '/gcs/bucket_o_fish/data/processed'
+  raw: './data/raw'
+  processed: './data/processed'
   kaggle_owner: 'crowww'
   kaggle_name: 'a-large-scale-fish-dataset'
-  save_model_path: '/gcs/bucket_o_fish/models'
+  save_model_path: './models'
 
 
 trainer_hyperparameters:
@@ -12,11 +14,12 @@ trainer_hyperparameters:
   max_epochs: 100
   batch_size: 64
   learning_rate: 0.001
-  patience: 50
+  patience: 20
   check_val_every_n_epoch: 5
   mode: 'min'
   monitor: 'val_loss'
   save_by: "best"
+  augment_train: true
 
 wandb_settings:
   entity: 'team-christian'
@@ -24,6 +27,8 @@ wandb_settings:
   mode: 'offline'
 
 print_cfg: true
+
+profile: True
 
 hydra:
   output_subdir: null
