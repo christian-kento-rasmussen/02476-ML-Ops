@@ -11,10 +11,10 @@ paths:
 
 trainer_hyperparameters:
   seed: 42
-  max_epochs: 100
-  batch_size: 64
-  learning_rate: 0.001
-  patience: 20
+  max_epochs: 500
+  batch_size: 32
+  learning_rate: 0.00005
+  patience: 30
   check_val_every_n_epoch: 5
   mode: 'min'
   monitor: 'val_loss'
@@ -24,7 +24,7 @@ trainer_hyperparameters:
 wandb_settings:
   entity: 'team-christian'
   project: 'FishEye'
-  mode: 'offline'
+  mode: 'online'
 
 print_cfg: true
 
