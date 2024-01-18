@@ -61,6 +61,9 @@ def train(cfg: DictConfig):
     train_images, train_labels = train_batch
     wandb.log({"train_images": [wandb.Image(image, caption=label) for image, label in zip(train_images, train_labels)]})
 
+    # compiles model
+    model.compile()
+
     # train image classifier
     trainer.fit(model, fishDataModule)
 
