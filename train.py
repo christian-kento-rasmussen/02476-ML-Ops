@@ -1,7 +1,7 @@
 import hydra
-import wandb
 from omegaconf import DictConfig, OmegaConf
 
+import wandb
 from FishEye.train_model import train
 
 
