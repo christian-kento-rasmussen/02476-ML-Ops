@@ -52,7 +52,6 @@ def train(cfg: DictConfig):
         check_val_every_n_epoch=CHECK_VAL_EVERY_N_EPOCH,
         callbacks=[checkpoint_callback, early_stopping_callback],
         logger=wandb_logger,
-        accelerator="cpu",
     )
 
     # log a few train images to wandb
