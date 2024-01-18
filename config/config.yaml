@@ -18,6 +18,7 @@ trainer_hyperparameters:
   check_val_every_n_epoch: 5
   mode: 'min'
   monitor: 'val_loss'
+  save_by: "best"
   augment_train: true
 
 wandb_settings:
