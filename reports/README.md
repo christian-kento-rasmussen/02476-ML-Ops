@@ -604,7 +604,7 @@ We ended up using ?? credits in total on cloud services. The reason for this num
 >
 > Answer:
 We developed the code locally and connected to our google cloud bucket with DVC to version control the data. When pushing to the main branch, gihub would run our unit tests to see if the tested parts still work. We had set up a trigger in gcp to build the training container docker image. We also used our trainer image to run the training process with vertex AI. We also manually built a prediction app image with fastAPI. The predict container was then deployed with cloud run and served to the world wide web. A small web project including the common index.html, style.css and script.js were also served from the container to serve an interactive webapp. As such, both frontend and backend was served from the container. The dotted lines in the figure indicate some of the flows that we did not manage to automate in time. We would have liked to automate the building of the predict image, as well as the training process and the deployment of the best model. We would especially have liked to build an image for prediction that can load in the ‘deployment’ version of the model without needing to be rebuilt (or maybe only have the last layer rebuilt) unless the architecture is changed.
-![Alt text](<figures/Screenshot 2024-01-18 at 20.57.01.png>)
+![Alt text](figures/IMG_0795.jpeg)
 
 ### Question 26
 
