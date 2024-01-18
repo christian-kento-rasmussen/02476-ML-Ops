@@ -22,14 +22,15 @@ def train(cfg: DictConfig):
     CHECK_VAL_EVERY_N_EPOCH = cfg.trainer_hyperparameters.check_val_every_n_epoch
     MODE = cfg.trainer_hyperparameters.mode
     MONITOR = cfg.trainer_hyperparameters.monitor
+    AUGMENT_TRAIN = cfg.trainer_hyperparameters.augment_train
 
-    # Extracting path 
+    # Extracting path
     DATAPATH = cfg.paths.processed
     SAVE_MODEL_PATH = cfg.paths.save_model_path
 
     # Initialize the model and the data module
     model = FishNN(cfg)
-    fishDataModule = FishDataModule(data_dir=DATAPATH, batch_size=BATCH_SIZE)
+    fishDataModule = FishDataModule(data_dir=DATAPATH, batch_size=BATCH_SIZE, augment=AUGMENT_TRAIN)
 
     # Initialize the callbacks
     checkpoint_callback = pl.callbacks.ModelCheckpoint(dirpath=SAVE_MODEL_PATH, monitor=MONITOR, mode=MODE)
@@ -49,8 +50,17 @@ def train(cfg: DictConfig):
         check_val_every_n_epoch=CHECK_VAL_EVERY_N_EPOCH,
         callbacks=[checkpoint_callback, early_stopping_callback],
         logger=wandb_logger,
+        accelerator="cpu",
     )
 
+    # log a few train images to wandb
+    fishDataModule.setup("train")
+    train_loader = fishDataModule.train_dataloader()
+    train_batch = next(iter(train_loader))
+    train_images, train_labels = train_batch
+    wandb.log({"train_images": [wandb.Image(image, caption=label) for image, label in zip(train_images, train_labels)]})
+
+    # train image classifier
     trainer.fit(model, fishDataModule)
 
     # Test the model with the lowest validation loss
