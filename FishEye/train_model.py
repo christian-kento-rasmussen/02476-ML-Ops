@@ -22,7 +22,8 @@ def train(cfg: DictConfig):
     CHECK_VAL_EVERY_N_EPOCH = cfg.trainer_hyperparameters.check_val_every_n_epoch
     MODE = cfg.trainer_hyperparameters.mode
     MONITOR = cfg.trainer_hyperparameters.monitor
-
+    SAVE_BY = cfg.trainer_hyperparameters.save_by
+    
     # Extracting path 
     DATAPATH = cfg.paths.processed
     SAVE_MODEL_PATH = cfg.paths.save_model_path
@@ -54,4 +55,4 @@ def train(cfg: DictConfig):
     trainer.fit(model, fishDataModule)
 
     # Test the model with the lowest validation loss
-    trainer.test(datamodule=fishDataModule, ckpt_path="best")
+    trainer.test(datamodule=fishDataModule, ckpt_path=SAVE_BY)
