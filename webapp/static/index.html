@@ -11,7 +11,7 @@
         <h1>Fish Classifier</h1>
         <canvas id="imageCanvas"></canvas>
         <form id="uploadForm">
-            <input type="file" id="imageInput" accept="image/*" />
+            <input type="file" id="imageInput" accept="image/*" onchange="updateDisplay()" />
             <button type="button" onclick="uploadImage()">Upload</button>
         </form>
         <div id="responseContainer"></div>

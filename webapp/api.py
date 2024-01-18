@@ -50,34 +50,3 @@ async def predict(image: UploadFile = File(...)):
     text = predictions[0] #process_image(image)
 
     return {"result": text}
-
-
-    # INstanciate a FishNN model
-    # model = FishNN(cfg=OmegaConf.load("config/config.yaml"))
-
-    # Load the best model weights into the model
-    import torchvision.transforms as transforms
-
-    
-
-    # Raw data to predict
-    image_filenames = [
-        "data/raw/NA_Fish_Dataset/Trout/00005.png",
-        #                       'data/raw/NA_Fish_Dataset/Red Sea Bream/100_1263.JPG',
-        "data/raw/NA_Fish_Dataset/Red Mullet/00017.png",
-    ]
-
-    # Load the images from the given paths as tensors
-    images = [transforms.ToTensor()(Image.open(filename)) for filename in image_filenames]
-
-    # Run the preprocessing on the images
-    images = preprocess_images(images)
-
-    # Specify the label mapping
-
-    
-
-    # Run the prediction
-    predictions = predict(model, images, label_mapping)
-
-    print(predictions)
